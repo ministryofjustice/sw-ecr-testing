@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/octo-sts/app/refs/heads/main/pkg/octosts/octosts.TrustPolicy.json
+
+issuer: https://oidc.eks.eu-west-2.amazonaws.com/id/DF366E49809688A3B16EEC29707D8C09
+subject: system:serviceaccount:sw-ns-dev:webops-production
+
+permissions:
+  actions: write
