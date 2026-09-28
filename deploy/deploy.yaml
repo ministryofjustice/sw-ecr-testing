@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: octo-sts-test
+  namespace: sw-ns-dev
+  labels:
+    app: octo-sts-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: octo-sts-test
+  template:
+    metadata:
+      labels:
+        app: octo-sts-test
+    spec:
+      serviceAccountName: octo-sts-test
+      automountServiceAccountToken: false
+
+     # PSA Restricted env so:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+
+      containers:
+      - name: octo-sts-test
+        image: sjwilliams80/docker-net-tools:latest
+        imagePullPolicy: Always
+
+        # PSA Restricted env so:
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - ALL
+
+        volumeMounts:
+        - mountPath: /var/run/secrets/octo-sts.dev
+          name: octo-sts-token
+          readOnly: true
+
+      volumes:
+      - name: octo-sts-token
+        projected:
+          defaultMode: 420
+          sources:
+          - serviceAccountToken:
+              audience: octo-sts.dev
+              expirationSeconds: 600
+              path: token
