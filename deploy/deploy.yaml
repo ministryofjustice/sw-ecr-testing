@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: octo-sts-test
-  namespace: sw-ns-dev
   labels:
     app: octo-sts-test
 spec:
