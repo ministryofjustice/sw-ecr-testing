@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/octo-sts/app/refs/heads/main/pkg/octosts/octosts.TrustPolicy.json
 
 issuer: https://a1ac791f-201e-4a9c-ab4c-7b05f5280e53.tokens.sts.global.api.aws
-subject: arn:aws:lambda:eu-west-2:843730871562:function:london-unpaid-work-github-trigger-trigger
+subject: arn:aws:iam::843730871562:role/london-unpaid-work-github-trigger-lambda
 
 permissions:
   actions: write
