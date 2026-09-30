@@ -1,4 +1,4 @@
-name: Hello World
+name: Hello World 2
 
 on:
   workflow_dispatch:
@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo hello world
-        run: echo "hello world"
+        run: echo "hello world 2"
